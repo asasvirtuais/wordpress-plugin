@@ -16,7 +16,8 @@
 		8080
 	],
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/composer:1": {}
+		"ghcr.io/devcontainers-contrib/features/composer:1": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	}
 
 	// Use 'postCreateCommand' to run commands after the container is created.

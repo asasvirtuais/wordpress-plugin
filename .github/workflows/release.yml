@@ -1,0 +1,57 @@
+name: Release Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh
+
+      - name: Increment version, update files, and create release
+        run: |
+          # Extract the current version from the plugin file
+          VERSION=$(grep -oP 'Version:\s*\K[\d.]+' asasvirtuais-wp.php)
+          IFS='.' read -ra VERSION_PARTS <<< "$VERSION"
+          PATCH=${VERSION_PARTS[2]}
+          NEW_PATCH=$((PATCH + 1))
+          NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$NEW_PATCH"
+
+          # Update the version in the plugin file
+          sed -i "s/Version:\s*$VERSION/Version: $NEW_VERSION/" asasvirtuais-wp.php
+
+          # Update the version in composer.json
+          jq '.version = "'$NEW_VERSION'"' composer.json > tmp.$$.json && mv tmp.$$.json composer.json
+
+          # Update the version in metadata.json
+          jq '.version = "'$NEW_VERSION'"' metadata.json > tmp.$$.json && mv tmp.$$.json metadata.json
+
+          # Generate release notes
+          RELEASE_NOTES=$(git log $(git describe --tags --abbrev=0)..HEAD --oneline)
+
+          # Commit and push the version updates
+          git config --global user.email "39817766+asas-virtuais@users.noreply.github.com"
+          git config --global user.name "Icaro Asas Virtuais"
+          git add asasvirtuais-wp.php composer.json metadata.json
+          git commit -m "Update version to $NEW_VERSION"
+          git push
+
+          # Create a new release
+          echo "$RELEASE_NOTES" | gh release create "$NEW_VERSION" --draft --notes-file -
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
