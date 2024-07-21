@@ -14,7 +14,7 @@
 use \YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 try {
-    
+
     $myUpdateChecker = PucFactory::buildUpdateChecker(
         'https://raw.githubusercontent.com/asas-virtuais/asasvirtuais-wp/main/metadata.json',
         __FILE__,
