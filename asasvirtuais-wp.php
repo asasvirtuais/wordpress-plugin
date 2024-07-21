@@ -2,8 +2,8 @@
 /**
  * Asas Virtuais WP
  *
- * Plugin Name:       Asas Virtuais WP
- * Version: 0.4.0
+ * Plugin Name: Asas Virtuais WP
+ * Version: 1.0.0
  */
 
 try {
