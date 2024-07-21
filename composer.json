@@ -1,6 +1,6 @@
 {
   "name": "asasvirtuais/asasvirtuais-wp",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "The only PHP codesbase I will ever maintan",
   "type": "wordpress-plugin",
   "require": {
