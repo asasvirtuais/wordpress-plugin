@@ -28,9 +28,13 @@ jobs:
           VERSION=$(grep -oP 'Version:\s*\K[\d.]+' asasvirtuais-wp.php)
           IFS='.' read -ra VERSION_PARTS <<< "$VERSION"
           PATCH=${VERSION_PARTS[2]}
-          NEW_PATCH=$((PATCH + 1))
+          # Check if PATCH is 0, indicating a new minor or major version, and do not increment
+          if [ "$PATCH" -ne 0 ]; then
+            NEW_PATCH=$((PATCH + 1))
+          else
+            NEW_PATCH=$PATCH
+          fi
           NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$NEW_PATCH"
-
           # Update the version in the plugin file
           sed -i "s/Version:\s*$VERSION/Version: $NEW_VERSION/" asasvirtuais-wp.php
 
