@@ -1,16 +1,16 @@
 {
-    "name": "asasvirtuais/asasvirtuais-wp",
-    "version": "0.1.0",
-    "description": "The only PHP codesbase I will ever maintan",
-    "type": "wordpress-plugin",
-    "require": {
-        "yahnis-elsts/plugin-update-checker": "^5.4"
-    },
-    "authors": [
-        {
-            "name": "Icaro Asas Virtuais",
-            "email": "39817766+asas-virtuais@users.noreply.github.com",
-            "homepage": "https://asasvirtuais.dev"
-        }
-    ]
+  "name": "asasvirtuais/asasvirtuais-wp",
+  "version": "0.1.2",
+  "description": "The only PHP codesbase I will ever maintan",
+  "type": "wordpress-plugin",
+  "require": {
+    "yahnis-elsts/plugin-update-checker": "^5.4"
+  },
+  "authors": [
+    {
+      "name": "Icaro Asas Virtuais",
+      "email": "39817766+asas-virtuais@users.noreply.github.com",
+      "homepage": "https://asasvirtuais.dev"
+    }
+  ]
 }
