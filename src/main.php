@@ -11,15 +11,17 @@
  * it will be WordPress specific and I vow to keep it well maintained.
  */
 
-use \YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 try {
 
-    $myUpdateChecker = PucFactory::buildUpdateChecker(
-        'https://raw.githubusercontent.com/asas-virtuais/asasvirtuais-wp/main/metadata.json',
-        __FILE__,
-        'asasvirtuais-wp'
-    );
+    add_action( 'admin_menu', function () {
+        add_menu_page(
+            'Asas Virtuais WP',
+            'Asas Virtuais',
+            'manage_options',
+            'asasvirtuais'
+        );
+    } );
 
 } catch (\Throwable $th) {
     error_log($th);
