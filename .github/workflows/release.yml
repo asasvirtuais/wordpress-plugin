@@ -51,7 +51,7 @@ jobs:
           git push
 
           # Create a new release
-          echo "$RELEASE_NOTES" | gh release create "$NEW_VERSION" --draft --notes-file -
+          echo "$RELEASE_NOTES" | gh release create "$NEW_VERSION" --notes-file -
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
