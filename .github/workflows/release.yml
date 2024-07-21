@@ -40,8 +40,14 @@ jobs:
           # Update the version in metadata.json
           jq '.version = "'$NEW_VERSION'"' metadata.json > tmp.$$.json && mv tmp.$$.json metadata.json
 
-          # Generate release notes
-          RELEASE_NOTES=$(git log $(git describe --tags --abbrev=0)..HEAD --oneline)
+          # Run composer install to update vendors
+          composer install
+
+          # Remove asasvirtuais-wp.zip if it exists
+          rm asasvirtuais-wp.zip
+
+          # Create a zip file with the source code including asasvirtuais-wp.php at root and vendors
+          zip -r "asasvirtuais-wp.zip" asasvirtuais-wp.php vendors src
 
           # Commit and push the version updates
           git config --global user.email "39817766+asas-virtuais@users.noreply.github.com"
