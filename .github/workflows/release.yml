@@ -44,7 +44,7 @@ jobs:
           composer install
 
           # Create a zip file with the source code including asasvirtuais-wp.php at root and vendors
-          zip -r "asasvirtuais-wp.zip" asasvirtuais-wp.php vendors src
+          zip -r "asasvirtuais-wp.zip" asasvirtuais-wp.php vendor src
 
           # Commit and push the version updates
           git config --global user.email "39817766+asas-virtuais@users.noreply.github.com"
