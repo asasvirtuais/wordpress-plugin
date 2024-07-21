@@ -3,7 +3,7 @@
  * Asas Virtuais WP
  *
  * Plugin Name: Asas Virtuais WP
- * Version: 1.0.1
+ * Version: 1.0.2
  */
 
 try {
