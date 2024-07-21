@@ -43,18 +43,18 @@ jobs:
           # Run composer install to update vendors
           composer install
 
-          # Remove asasvirtuais-wp.zip if it exists
-          rm asasvirtuais-wp.zip
-
           # Create a zip file with the source code including asasvirtuais-wp.php at root and vendors
           zip -r "asasvirtuais-wp.zip" asasvirtuais-wp.php vendors src
 
           # Commit and push the version updates
           git config --global user.email "39817766+asas-virtuais@users.noreply.github.com"
           git config --global user.name "Icaro Asas Virtuais"
-          git add asasvirtuais-wp.php composer.json metadata.json asasvirtuais-wp.zip
+          git add asasvirtuais-wp.php composer.json metadata.json
           git commit -m "Update version to $NEW_VERSION"
           git push
+
+          # Upload the zip file as a release asset
+          gh release upload "$NEW_VERSION" asasvirtuais-wp.zip --clobber
 
           # Create a new release
           echo "$RELEASE_NOTES" | gh release create "$NEW_VERSION" --notes-file -
