@@ -44,8 +44,8 @@ jobs:
           RELEASE_NOTES=$(git log $(git describe --tags --abbrev=0)..HEAD --oneline)
 
           # Commit and push the version updates
-          git config --global user.email "39817766+asas-virtuais@users.noreply.github.com"
-          git config --global user.name "Icaro Asas Virtuais"
+          git config --global user.email "actions@users.noreply.github.com"
+          git config --global user.name "GitHub Actions"
           git add asasvirtuais-wp.php composer.json metadata.json
           git commit -m "Update version to $NEW_VERSION"
           git push
