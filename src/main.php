@@ -19,7 +19,10 @@ try {
             'Asas Virtuais WP',
             'Asas Virtuais',
             'manage_options',
-            'asasvirtuais-wp'
+            'asasvirtuais',
+            function () {
+                echo '<h1>Asas Virtuais WP</h1>';
+            }
         );
     } );
 
