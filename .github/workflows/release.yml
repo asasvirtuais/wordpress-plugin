@@ -53,11 +53,12 @@ jobs:
           git commit -m "Update version to $NEW_VERSION"
           git push
 
+          # Create a new release
+          gh release create "$NEW_VERSION" --notes-file -
           # Upload the zip file as a release asset
           gh release upload "$NEW_VERSION" asasvirtuais-wp.zip --clobber
 
-          # Create a new release
-          echo "$RELEASE_NOTES" | gh release create "$NEW_VERSION" --notes-file -
+          echo "$RELEASE_NOTES"
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
