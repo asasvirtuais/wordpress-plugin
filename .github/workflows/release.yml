@@ -47,8 +47,15 @@ jobs:
           # Run composer install to update vendors
           composer install
 
-          # Create a zip file with the source code including asasvirtuais-wp.php at root and vendors
-          zip -r "asasvirtuais-wp.zip" asasvirtuais-wp.php vendor src
+          # Create a temporary directory and copy the required files
+          mkdir asasvirtuais-wp
+          cp -r asasvirtuais-wp.php vendor src asasvirtuais-wp/
+
+          # Create a zip file with the temporary directory, ensuring the structure is preserved
+          zip -r "asasvirtuais-wp.zip" asasvirtuais-wp
+
+          # Remove the temporary directory
+          rm -rf asasvirtuais-wp
 
           # Commit and push the version updates
           git config --global user.email "39817766+asas-virtuais@users.noreply.github.com"
