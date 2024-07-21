@@ -54,4 +54,4 @@ jobs:
           echo "$RELEASE_NOTES" | gh release create "$NEW_VERSION" --draft --notes-file -
 
         env:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_WRITE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
