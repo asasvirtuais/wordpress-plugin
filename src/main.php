@@ -22,11 +22,11 @@ try {
                 'manage_options',
                 'asasvirtuais',
                 function () {
-                    echo '<h1>Asas Virtuais WP</h1><iframe src="https://asasvirtuais.dev"></iframe>';
+                    echo '<h1>Asas Virtuais WP</h1><iframe width="1024" height="576" style="margin: auto; display: block;" src="https://asasvirtuais.dev"></iframe>';
                 }
             );
-        } catch(error) {
-
+        } catch(\Throwable $th) {
+            error_log($th);
         }
     } );
 
