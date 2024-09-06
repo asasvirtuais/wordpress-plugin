@@ -15,15 +15,19 @@
 try {
 
     add_action( 'admin_menu', function () {
-        add_menu_page(
-            'Asas Virtuais WP',
-            'Asas Virtuais',
-            'manage_options',
-            'asasvirtuais',
-            function () {
-                echo '<h1>Asas Virtuais WP</h1>';
-            }
-        );
+        try {
+            add_menu_page(
+                'Asas Virtuais WP',
+                'Asas Virtuais',
+                'manage_options',
+                'asasvirtuais',
+                function () {
+                    echo '<h1>Asas Virtuais WP</h1><iframe src="https://asasvirtuais.dev"></iframe>';
+                }
+            );
+        } catch(error) {
+
+        }
     } );
 
 } catch (\Throwable $th) {
