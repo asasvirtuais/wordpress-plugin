@@ -25,7 +25,7 @@ jobs:
       - name: Increment version, update files, and create release
         run: |
           # Extract the current version from the plugin file
-          VERSION=$(grep -oP 'Version:\s*\K[\d.]+' asasvirtuais-wp.php)
+          VERSION=$(grep -oP 'Version:\s*\K[\d.]+' main.php)
           IFS='.' read -ra VERSION_PARTS <<< "$VERSION"
           PATCH=${VERSION_PARTS[2]}
           # Check if PATCH is 0, indicating a new minor or major version, and do not increment
@@ -36,7 +36,7 @@ jobs:
           fi
           NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$NEW_PATCH"
           # Update the version in the plugin file
-          sed -i "s/Version:\s*$VERSION/Version: $NEW_VERSION/" asasvirtuais-wp.php
+          sed -i "s/Version:\s*$VERSION/Version: $NEW_VERSION/" main.php
 
           # Update the version in composer.json
           jq '.version = "'$NEW_VERSION'"' composer.json > tmp.$$.json && mv tmp.$$.json composer.json
@@ -48,26 +48,26 @@ jobs:
           composer install
 
           # Create a temporary directory and copy the required files
-          mkdir asasvirtuais-wp
-          cp -r asasvirtuais-wp.php vendor src asasvirtuais-wp/
+          mkdir wordpress-plugin
+          cp -r main.php vendor src wordpress-plugin/
 
           # Create a zip file with the temporary directory, ensuring the structure is preserved
-          zip -r "asasvirtuais-wp.zip" asasvirtuais-wp
+          zip -r "wordpress-plugin.zip" wordpress-plugin
 
           # Remove the temporary directory
-          rm -rf asasvirtuais-wp
+          rm -rf wordpress-plugin
 
           # Commit and push the version updates
           git config --global user.email "39817766+asas-virtuais@users.noreply.github.com"
           git config --global user.name "Icaro Asas Virtuais"
-          git add asasvirtuais-wp.php composer.json composer.lock metadata.json
+          git add main.php composer.json composer.lock metadata.json
           git commit -m "Update version to $NEW_VERSION"
           git push
 
           # Create a new release
           gh release create "$NEW_VERSION" --notes-file -
           # Upload the zip file as a release asset
-          gh release upload "$NEW_VERSION" asasvirtuais-wp.zip --clobber
+          gh release upload "$NEW_VERSION" wordpress-plugin.zip --clobber
 
           echo "$RELEASE_NOTES"
 
